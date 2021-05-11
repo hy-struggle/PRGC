@@ -95,7 +95,7 @@ class BertForRE(BertPreTrainedModel):
             ex_params: experiment parameters
         """
         # get params for experiments
-        corres_threshold, rel_threshold = ex_params['corres_threshold'], ex_params['rel_threshold']
+        corres_threshold, rel_threshold = ex_params.get('corres_threshold', 0.5), ex_params.get('rel_threshold', 0.1)
         # ablation study
         ensure_corres, ensure_rel = ex_params['ensure_corres'], ex_params['ensure_rel']
         # pre-train model

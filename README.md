@@ -1,5 +1,5 @@
 # PRGC: Potential Relation and Global Correspondence Based Joint Relational Triple Extraction
-This repository contains the source code and dataset for the paper: **PRGC: Potential Relation and Global Correspondence Based Joint Relational Triple Extraction.** 
+This repository contains the source code and dataset for the paper: **PRGC: Potential Relation and Global Correspondence Based Joint Relational Triple Extraction.** Hengyi Zheng, Rui Wen, Xi Chen et al. ACL 2021.
 
 ## Overview
 
@@ -45,9 +45,7 @@ python ../train.py \
 --device_id=0 \
 --corpus_type=NYT-star \
 --ensure_corres \
---ensure_rel \
---corres_threshold=0.5 \
---rel_threshold=0.5
+--ensure_rel
 ```
 
 **4. Evaluate**
@@ -65,6 +63,6 @@ python ../evaluate.py \
 --ensure_corres \
 --ensure_rel \
 --corres_threshold=0.5 \
---rel_threshold=0.5
+--rel_threshold=0.1
 ```
 

@@ -36,9 +36,7 @@ class Params:
         # PRST parameters
         self.seq_tag_size = len(Label2IdxSub)
         # load label2id
-        f = open(self.data_dir/'rel2id.json', 'r', encoding='utf-8')
-        self.rel2idx = json.load(f)[-1]
-        f.close()
+        self.rel2idx = json.load(open(self.data_dir/'rel2id.json', 'r', encoding='utf-8'))[-1]
         self.rel_num = len(self.rel2idx)
 
         # early stop strategy

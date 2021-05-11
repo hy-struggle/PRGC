@@ -33,7 +33,6 @@ parser.add_argument('--ensure_rel', action='store_true', help="relation judgemen
 parser.add_argument('--emb_fusion', type=str, default="concat", help="way to embedding")
 
 
-
 def get_metrics(correct_num, predict_num, gold_num):
     p = correct_num / predict_num if predict_num > 0 else 0
     r = correct_num / gold_num if gold_num > 0 else 0

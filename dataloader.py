@@ -79,14 +79,6 @@ class CustomDataLoader(object):
         """
         print("=*=" * 10)
         print("Loading {} data...".format(data_sign))
-        # get relation to idx
-        with open(self.data_dir / f'rel2id.json', 'r', encoding='utf-8') as f_re:
-            rel2idx = json.load(f_re)[-1]
-        # get examples
-        if data_sign in ("train", "val", "test", "pseudo", 'EPO', 'SEO', 'SOO', 'Normal', '1', '2', '3', '4', '5'):
-            examples = read_examples(self.data_dir, data_sign=data_sign, rel2idx=rel2idx)
-        else:
-            raise ValueError("please notice that the data can only be train/val/test!!")
         # get features
         # 数据保存路径
         cache_path = os.path.join(self.data_dir, "{}.cache.{}".format(data_sign, str(self.max_seq_length)))
@@ -94,6 +86,14 @@ class CustomDataLoader(object):
         if os.path.exists(cache_path) and self.data_cache:
             features = torch.load(cache_path)
         else:
+            # get relation to idx
+            with open(self.data_dir / f'rel2id.json', 'r', encoding='utf-8') as f_re:
+                rel2idx = json.load(f_re)[-1]
+            # get examples
+            if data_sign in ("train", "val", "test", "pseudo", 'EPO', 'SEO', 'SOO', 'Normal', '1', '2', '3', '4', '5'):
+                examples = read_examples(self.data_dir, data_sign=data_sign, rel2idx=rel2idx)
+            else:
+                raise ValueError("please notice that the data can only be train/val/test!!")
             # 生成数据
             features = convert_examples_to_features(self.params, examples, self.tokenizer, rel2idx, data_sign,
                                                     ex_params)

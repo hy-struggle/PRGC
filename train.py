@@ -196,8 +196,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
     params = utils.Params(args.ex_index, args.corpus_type)
     ex_params = {
-        'corres_threshold': args.corres_threshold,
-        'rel_threshold': args.rel_threshold,
         'ensure_corres': args.ensure_corres,
         'ensure_rel': args.ensure_rel,
         'num_negs': args.num_negs,
