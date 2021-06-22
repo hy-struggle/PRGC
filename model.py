@@ -241,7 +241,6 @@ if __name__ == '__main__':
     model = BertForRE.from_pretrained(config=bert_config,
                                       pretrained_model_name_or_path=params.bert_model_dir,
                                       params=params)
-    # 保存bert config
     model.to(params.device)
 
     for n, _ in model.named_parameters():

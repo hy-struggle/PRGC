@@ -144,11 +144,8 @@ if __name__ == '__main__':
         'emb_fusion': args.emb_fusion
     }
 
-    # 设置模型使用的gpu
     torch.cuda.set_device(args.device_id)
-    # 查看现在使用的设备
     print('current device:', torch.cuda.current_device())
-    # 预测验证集还是测试集
     mode = args.mode
     # Set the random seed for reproducible experiments
     random.seed(args.seed)

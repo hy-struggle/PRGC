@@ -38,7 +38,6 @@ class CustomDataLoader(object):
         self.max_seq_length = params.max_seq_length
         self.tokenizer = BertTokenizer(vocab_file=os.path.join(params.bert_model_dir, 'vocab.txt'),
                                        do_lower_case=False)
-        # 保存数据(Bool)
         self.data_cache = params.data_cache
 
     @staticmethod
@@ -80,9 +79,7 @@ class CustomDataLoader(object):
         print("=*=" * 10)
         print("Loading {} data...".format(data_sign))
         # get features
-        # 数据保存路径
         cache_path = os.path.join(self.data_dir, "{}.cache.{}".format(data_sign, str(self.max_seq_length)))
-        # 读取数据
         if os.path.exists(cache_path) and self.data_cache:
             features = torch.load(cache_path)
         else:
@@ -94,7 +91,6 @@ class CustomDataLoader(object):
                 examples = read_examples(self.data_dir, data_sign=data_sign, rel2idx=rel2idx)
             else:
                 raise ValueError("please notice that the data can only be train/val/test!!")
-            # 生成数据
             features = convert_examples_to_features(self.params, examples, self.tokenizer, rel2idx, data_sign,
                                                     ex_params)
             # save data

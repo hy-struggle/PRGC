@@ -87,10 +87,8 @@ def tag_mapping_nearest(predict_tags, pre_rels=None, label2idx_sub=None, label2i
                 tails.append(ch)
         # the heuristic nearest principle
         if len(heads) != 0 and len(tails) != 0:
-            # SPO主体重叠
             if len(heads) < len(tails):
                 heads += [heads[-1]] * (len(tails) - len(heads))
-            # SPO客体重叠
             if len(heads) > len(tails):
                 tails += [tails[-1]] * (len(heads) - len(tails))
 
@@ -122,7 +120,6 @@ def tag_mapping_corres(predict_tags, pre_corres, pre_rels=None, label2idx_sub=No
                 heads.append(ch)
             elif ch[0] == 'T':
                 tails.append(ch)
-        # 有效的主客体
         retain_hts = [(h, t) for h in heads for t in tails if pre_corres[h[1]][t[1]] == 1]
         for h_t in retain_hts:
             if pre_rels is not None:

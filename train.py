@@ -45,7 +45,6 @@ def train(model, data_iterator, optimizer, params, ex_params):
     # set model to training mode
     model.train()
 
-    # 记录平均损失
     loss_avg = utils.RunningAverage()
     loss_avg_seq = utils.RunningAverage()
     loss_avg_mat = utils.RunningAverage()
@@ -67,7 +66,6 @@ def train(model, data_iterator, optimizer, params, ex_params):
 
         if params.n_gpu > 1 and args.multi_gpu:
             loss = loss.mean()  # mean() to average on multi-gpu.
-        # 梯度累加
         if params.gradient_accumulation_steps > 1:
             loss = loss / params.gradient_accumulation_steps
 
@@ -112,31 +110,24 @@ def train_and_evaluate(model, params, ex_params, restore_file=None):
 
     # Prepare optimizer
     # fine-tuning
-    # 取模型权重
     param_optimizer = list(model.named_parameters())
     # pretrain model param
     param_pre = [(n, p) for n, p in param_optimizer if 'bert' in n]
     # downstream model param
     param_downstream = [(n, p) for n, p in param_optimizer if 'bert' not in n]
-    # 不进行衰减的权重
     no_decay = ['bias', 'LayerNorm', 'layer_norm']
-    # 将权重分组
     optimizer_grouped_parameters = [
         # pretrain model param
-        # 衰减
         {'params': [p for n, p in param_pre if not any(nd in n for nd in no_decay)],
          'weight_decay': params.weight_decay_rate, 'lr': params.fin_tuning_lr
          },
-        # 不衰减
         {'params': [p for n, p in param_pre if any(nd in n for nd in no_decay)],
          'weight_decay': 0.0, 'lr': params.fin_tuning_lr
          },
         # downstream model
-        # 衰减
         {'params': [p for n, p in param_downstream if not any(nd in n for nd in no_decay)],
          'weight_decay': params.weight_decay_rate, 'lr': params.downs_en_lr
          },
-        # 不衰减
         {'params': [p for n, p in param_downstream if any(nd in n for nd in no_decay)],
          'weight_decay': 0.0, 'lr': params.downs_en_lr
          }
@@ -160,9 +151,7 @@ def train_and_evaluate(model, params, ex_params, restore_file=None):
         # train_metrics = evaluate(args, model, train_loader, params, mark='Train',
         #                          verbose=True)  # Dict['loss', 'f1']
         val_metrics, _, _ = evaluate(model, val_loader, params, ex_params, mark='Val')
-        # 验证集f1-score
         val_f1 = val_metrics['f1']
-        # 提升的f1-score
         improve_f1 = val_f1 - best_val_f1
 
         # Save weights of the network
@@ -207,9 +196,7 @@ if __name__ == '__main__':
         n_gpu = torch.cuda.device_count()
         params.n_gpu = n_gpu
     else:
-        # 设置模型使用的gpu
         torch.cuda.set_device(args.device_id)
-        # 查看现在使用的设备
         print('current device:', torch.cuda.current_device())
         params.n_gpu = n_gpu = 1
 

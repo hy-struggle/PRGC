@@ -3,7 +3,7 @@ This repository contains the source code and dataset for the paper: **PRGC: Pote
 
 ## Overview
 
-![overview_v6](https://raw.githubusercontent.com/hy-struggle/img/master/markdown/20210127144252.png)
+![image-20210622212609011](https://raw.githubusercontent.com/hy-struggle/img/master/markdown/20210622212609.png)
 
 ## Requirements
 
@@ -34,7 +34,7 @@ Put our preprocessed datasets under `./data`.
 
 **3. Train**
 
-Just run the script in `./scripy` by `sh train.sh`.
+Just run the script in `./script` by `sh train.sh`.
 
 For example, to train the model for NYT* dataset, update the `train.sh` as:
 
@@ -50,7 +50,7 @@ python ../train.py \
 
 **4. Evaluate**
 
-Just run the script in `./scripy` by `sh evaluate.sh`.
+Just run the script in `./script` by `sh evaluate.sh`.
 
 For example, to train the model for NYT* dataset, update the `evaluate.sh` as:
 
