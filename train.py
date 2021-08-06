@@ -213,7 +213,8 @@ if __name__ == '__main__':
     logging.info("device: {}".format(params.device))
 
     logging.info('Load pre-train model weights...')
-    bert_config = BertConfig.from_json_file(os.path.join(params.bert_model_dir, 'bert_config.json'))
+    bert_config = BertConfig.from_json_file(os.path.join(params.bert_model_dir, 'config.json'))
+
     model = BertForRE.from_pretrained(config=bert_config,
                                       pretrained_model_name_or_path=params.bert_model_dir,
                                       params=params)
