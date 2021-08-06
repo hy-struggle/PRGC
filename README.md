@@ -9,10 +9,17 @@ This repository contains the source code and dataset for the paper: **PRGC: Pote
 
 The main requirements are:
 
-  - python==3.7.9
-  - pytorch==1.6.0
-  - transformers==3.2.0
-  - tqdm
+```
+tqdm==4.59.0
+transformers==3.2.0
+torch==1.9.0
+torchaudio==0.9.0
+torchvision==0.10.0
+```
+
+You can run in terminal:`pip install -r requirements.txt`
+or (国内请使用=>)`pip install -i https://pypi.douban.com/simple -r requirements.txt`
+
 
 ## Datasets
 
@@ -26,7 +33,7 @@ Or you can just download our preprocessed [datasets](https://drive.google.com/fi
 
 **1. Get pre-trained BERT model for PyTorch**
 
-Download [BERT-Base-Cased](https://huggingface.co/bert-base-cased/tree/main) which contains `pytroch_model.bin`, `vocab.txt` and `config.json`. Put these under `./pretrain_models`.
+Download [BERT-Base-Cased](https://huggingface.co/bert-base-cased/tree/main) which contains `pytroch_model.bin`, `vocab.txt` and `config.json`. Put these under `./pretrain_models/bert_base_cased/`.
 
 **2. Build Data**
 
